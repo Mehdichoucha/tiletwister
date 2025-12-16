@@ -4,7 +4,9 @@
 class Grid {
 public:   // Ici on mettra les actions possibles (bouger, afficher...)
     Grid();
-
+    void display(); // <--- Nouvelle fonction pour afficher
+    void spawnRandomTile(); // <--- Nouvelle fonction
+    
 private: // Ici on met les données cachées (les nombres)
     std::array<std::array<int, 4>, 4> data;
 };

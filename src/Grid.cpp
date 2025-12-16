@@ -1,10 +1,32 @@
-#include "../include/Grid.hpp" // On inclut notre plan
+#include "../include/Grid.hpp"
+#include <iostream> // <--- Ne pas oublier pour std::cout
+#include <vector>  // Pour lister les cases vides
+#include <cstdlib> // Pour rand() (le hasard)
 
-// Grid::Grid veut dire "Le constructeur Grid qui appartient à la classe Grid"
 Grid::Grid() {
-    for (int i = 0; i < 4; i++) {       // Pour chaque ligne i
-        for (int j = 0; j < 4; j++) {   // Pour chaque colonne j
-            data[i][j] = 0;             // On met la case à 0
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            data[i][j] = 0;
         }
+    }
+}
+
+// Nouvelle fonction d'affichage
+void Grid::display() {
+    std::cout << "-----------------" << std::endl;
+    for (int i = 0; i < 4; i++) {
+        std::cout << "| "; // Début de ligne
+        for (int j = 0; j < 4; j++) {
+            // On affiche le nombre suivi d'un espace
+            // Si c'est 0, on affiche un point '.' pour que ce soit plus lisible
+            if (data[i][j] == 0) {
+                std::cout << ". ";
+            } else {
+                std::cout << data[i][j] << " ";
+            }
+            std::cout << "| "; // Séparateur
+        }
+        std::cout << std::endl; // Fin de ligne (retour chariot)
+        std::cout << "-----------------" << std::endl;
     }
 }
