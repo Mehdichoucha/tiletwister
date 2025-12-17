@@ -15,7 +15,7 @@ int main() {
     char input;
     bool running = true;
 
-   while (running) {
+    while (running) {
         std::cout << "Action (z=haut, q=gauche, s=bas, d=droite, x=quitter) : ";
         std::cin >> input;
 
@@ -23,7 +23,7 @@ int main() {
             running = false;
         } 
         else {
-            bool moved = false; // On ne fait apparaitre une tuile que si on a bougé
+            bool moved = false; 
             
             if (input == 'q') { gameGrid.moveLeft(); moved = true; }
             else if (input == 'd') { gameGrid.moveRight(); moved = true; }
@@ -35,8 +35,19 @@ int main() {
 
             if (moved) {
                 gameGrid.spawnRandomTile();
+
+                // --- AJOUT ICI ---
+                // Efface la console pour que l'affichage soit propre
+                #ifdef _WIN32
+                    std::system("cls");   // Commande pour Windows
+                #else
+                    std::system("clear"); // Commande pour Mac/Linux
+                #endif
+                // -----------------
+
                 gameGrid.display();
             }
         }
     }
-}    
+    return 0;
+}
