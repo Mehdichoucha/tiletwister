@@ -64,3 +64,44 @@ void Grid::spawnRandomTile() {
 
     data[target.first][target.second] = value;
 }
+
+
+void Grid::moveLeft() {
+    for (int i = 0; i < 4; i++) {
+        // --- ÉTAPE 1 : Tasser à gauche (supprimer les 0 intermédiaires) ---
+        // On crée un tableau temporaire pour stocker les nombres non-nuls
+        std::array<int, 4> tempRow = {0, 0, 0, 0};
+        int index = 0;
+
+        // On garde seulement ce qui n'est pas 0
+        for (int j = 0; j < 4; j++) {
+            if (data[i][j] != 0) {
+                tempRow[index] = data[i][j];
+                index++;
+            }
+        }
+        // On remet la ligne tassée dans la grille
+        data[i] = tempRow;
+
+        // --- ÉTAPE 2 : Fusionner les doublons ---
+        for (int j = 0; j < 3; j++) {
+            // Si une case est égale à sa voisine de droite (et n'est pas 0)
+            if (data[i][j] != 0 && data[i][j] == data[i][j + 1]) {
+                data[i][j] *= 2;      // On double la valeur (2+2 = 4)
+                data[i][j + 1] = 0;   // L'autre case devient vide
+            }
+        }
+
+        // --- ÉTAPE 3 : Tasser à nouveau (après la fusion, des trous ont pu apparaître) ---
+        // Exemple : [2, 2, 4, 0] -> fusion -> [4, 0, 4, 0] -> il faut retasser -> [4, 4, 0, 0]
+        tempRow = {0, 0, 0, 0};
+        index = 0;
+        for (int j = 0; j < 4; j++) {
+            if (data[i][j] != 0) {
+                tempRow[index] = data[i][j];
+                index++;
+            }
+        }
+        data[i] = tempRow;
+    }
+}
