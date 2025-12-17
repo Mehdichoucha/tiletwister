@@ -141,3 +141,75 @@ void Grid::moveRight() {
         data[i] = tempRow;
     }
 }
+
+void Grid::moveUp() {
+    for (int j = 0; j < 4; j++) { // Pour chaque colonne
+        std::array<int, 4> tempCol = {0, 0, 0, 0};
+        int index = 0; // On remplit par le haut
+
+        // 1. Tasser vers le haut
+        for (int i = 0; i < 4; i++) {
+            if (data[i][j] != 0) {
+                tempCol[index] = data[i][j];
+                index++;
+            }
+        }
+        // Réappliquer la colonne
+        for(int i=0; i<4; i++) data[i][j] = tempCol[i];
+
+        // 2. Fusionner (du haut vers le bas)
+        for (int i = 0; i < 3; i++) {
+            if (data[i][j] != 0 && data[i][j] == data[i + 1][j]) {
+                data[i][j] *= 2;
+                data[i + 1][j] = 0;
+            }
+        }
+
+        // 3. Re-tasser
+        tempCol = {0, 0, 0, 0};
+        index = 0;
+        for (int i = 0; i < 4; i++) {
+            if (data[i][j] != 0) {
+                tempCol[index] = data[i][j];
+                index++;
+            }
+        }
+        for(int i=0; i<4; i++) data[i][j] = tempCol[i];
+    }
+}
+
+
+void Grid::moveDown() {
+    for (int j = 0; j < 4; j++) { // Pour chaque colonne
+        std::array<int, 4> tempCol = {0, 0, 0, 0};
+        int index = 3; // On remplit par le bas
+
+        // 1. Tasser vers le bas
+        for (int i = 3; i >= 0; i--) {
+            if (data[i][j] != 0) {
+                tempCol[index] = data[i][j];
+                index--;
+            }
+        }
+        for(int i=0; i<4; i++) data[i][j] = tempCol[i];
+
+        // 2. Fusionner (du bas vers le haut)
+        for (int i = 3; i > 0; i--) {
+            if (data[i][j] != 0 && data[i][j] == data[i - 1][j]) {
+                data[i][j] *= 2;
+                data[i - 1][j] = 0;
+            }
+        }
+
+        // 3. Re-tasser
+        tempCol = {0, 0, 0, 0};
+        index = 3;
+        for (int i = 3; i >= 0; i--) {
+            if (data[i][j] != 0) {
+                tempCol[index] = data[i][j];
+                index--;
+            }
+        }
+        for(int i=0; i<4; i++) data[i][j] = tempCol[i];
+    }
+}
