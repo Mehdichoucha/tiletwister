@@ -1,24 +1,37 @@
 #include <iostream>
-#include <cstdlib> // <--- Ajout
-#include <ctime>   // <--- Ajout
-#include "../include/Grid.hpp"  // On importe notre plan de Grille
-
+#include <cstdlib>
+#include <ctime>
+#include "../include/Grid.hpp"
 
 int main() {
+    // Initialisation du hasard
+    std::srand(std::time(nullptr)); 
 
-    // Initialisation de la graine aléatoire basée sur l'heure actuelle
-    std::srand(std::time(nullptr));
+    std::cout << "=== TILE TWISTER (Console Version) ===" << std::endl;
+    
+    Grid gameGrid;
+    gameGrid.display();
 
-    std::cout << "Tile Twister : Initialisation..." << std::endl;
+    char input;
+    bool running = true;
 
-    // On crée une instance de la grille.
-    // Cela appelle automatiquement le constructeur Grid() que j'ai écrit
-    // et remplit le tableau de zéros.
-    Grid gameGrid; 
+    while (running) {
+        std::cout << "Action (g = gauche, q = quitter) : ";
+        std::cin >> input;
 
-    std::cout << "Grille créée et initialisée :" << std::endl;
-    gameGrid.display(); // <--- On affiche !
+        if (input == 'q') {
+            running = false;
+        } 
+        else if (input == 'g') {
+            gameGrid.moveLeft();       // 1. On bouge
+            gameGrid.spawnRandomTile(); // 2. Une nouvelle tuile apparaît
+            gameGrid.display();         // 3. On montre le résultat
+        } 
+        else {
+            std::cout << "Commande inconnue. Essayez 'g'." << std::endl;
+        }
+    }
 
+    std::cout << "Fin de la partie !" << std::endl;
     return 0;
 }
-

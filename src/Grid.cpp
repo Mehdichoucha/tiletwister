@@ -105,3 +105,39 @@ void Grid::moveLeft() {
         data[i] = tempRow;
     }
 }
+
+
+void Grid::moveRight() {
+    for (int i = 0; i < 4; i++) {
+        std::array<int, 4> tempRow = {0, 0, 0, 0};
+        int index = 3; // On commence à remplir par la droite
+
+        // 1. Tasser à droite
+        for (int j = 3; j >= 0; j--) {
+            if (data[i][j] != 0) {
+                tempRow[index] = data[i][j];
+                index--;
+            }
+        }
+        data[i] = tempRow;
+
+        // 2. Fusionner (de la droite vers la gauche)
+        for (int j = 3; j > 0; j--) {
+            if (data[i][j] != 0 && data[i][j] == data[i][j - 1]) {
+                data[i][j] *= 2;
+                data[i][j - 1] = 0;
+            }
+        }
+
+        // 3. Re-tasser après fusion
+        tempRow = {0, 0, 0, 0};
+        index = 3;
+        for (int j = 3; j >= 0; j--) {
+            if (data[i][j] != 0) {
+                tempRow[index] = data[i][j];
+                index--;
+            }
+        }
+        data[i] = tempRow;
+    }
+}
