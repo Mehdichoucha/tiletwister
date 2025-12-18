@@ -12,6 +12,9 @@ include_directories(include)
 add_executable(TileTwister 
     src/main.cpp
     src/Grid.cpp
+    src/Game.cpp  
+    src/Grid_Movement.cpp 
+    src/Grid_Check.cpp
 )
 
 

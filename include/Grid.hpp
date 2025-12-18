@@ -10,6 +10,10 @@ public:   // Ici on mettra les actions possibles (bouger, afficher...)
     void moveRight();
     void moveUp();
     void moveDown();
+
+    bool checkWin();
+    bool checkGameOver();
+
 private: // Ici on met les données cachées (les nombres)
     std::array<std::array<int, 4>, 4> data;
 };
