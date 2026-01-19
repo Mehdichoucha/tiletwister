@@ -1,0 +1,20 @@
+# Build directories
+build/
+cmake-build-*/
+
+# Executables
+TileTwister
+UnitTests
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+_deps/
