@@ -51,6 +51,10 @@ Les dépendances SDL3 et SDL3_ttf sont téléchargées automatiquement via CMake
 
 3. Configurez avec CMake (en supposant Visual Studio) :
    ```
+   cmake .. -G "Visual Studio 17 2022"
+   ```
+   Ou pour une version plus ancienne :
+   ```
    cmake .. -G "Visual Studio 16 2019"
    ```
    Ou pour MinGW :
@@ -59,7 +63,7 @@ Les dépendances SDL3 et SDL3_ttf sont téléchargées automatiquement via CMake
    ```
 
 4. Compilez :
-   - Avec Visual Studio : Ouvrez TileTwister.sln et build.
+   - Avec Visual Studio : Ouvrez le fichier `TileTwister.sln` généré dans le dossier build avec Visual Studio, puis build le projet.
    - Avec MinGW : `mingw32-make`
 
 ## Lancement
@@ -100,8 +104,8 @@ Lancer les tests : cd build && UnitTests.exe
 
    ## Pour Windows avec Visual Studio :
 
-Configurer : cd build && cmake .. -G "Visual Studio 16 2019" (adapte la version)
-Compiler : Ouvre TileTwister.sln dans Visual Studio et build, ou utilise msbuild TileTwister.sln en ligne de commande.
+Configurer : cd build && cmake .. -G "Visual Studio 17 2022" (adapte la version)
+Compiler : Ouvre le fichier TileTwister.sln dans Visual Studio et build, ou utilise msbuild TileTwister.sln en ligne de commande.
 Lancer le jeu : cd build && TileTwister.exe
 Lancer les tests : cd build && UnitTests.exe
 
